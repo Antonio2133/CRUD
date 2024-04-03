@@ -1,6 +1,6 @@
+import '../components/styles/UserCard.css'
 
-
-const UserCard = ({user, deleteUser, setUserEdit}) => {
+const UserCard = ({user, deleteUser, setUserEdit, handleOpenForm}) => {
 
   const handleDelete = () => {
     deleteUser('/users/', user.id)
@@ -8,20 +8,23 @@ const UserCard = ({user, deleteUser, setUserEdit}) => {
 
   const handleEdit = () => {
     setUserEdit(user)
+    handleOpenForm()
   }
 
   return (
-    <article>
-      <h2>{`${user.first_name} ${user.last_name}`}</h2>
-      <hr/>
-      <ul>
-        <li><span>Email</span><span>{user.email}</span></li>
-        <li><span>Birthday</span><span>{user.birthday}</span></li>
+    <div className='card_container'>
+    <article className="card">
+      <h2 className="card_label">{`${user.first_name} ${user.last_name}`}</h2>
+      <ul className="card_info">
+        <li className="info"><span>Email</span><span>{user.email}</span></li>
+        <li className="info"><span>Birthday</span><span>{user.birthday}</span></li>
       </ul>
-      <hr/>
-      <button onClick={handleDelete}>Delete</button>
-      <button onClick={handleEdit}>Edit</button>
+      <div className='card_btn_container'>
+      <button className='card_btn_delete' src='../img/contact_form.png' onClick={handleDelete}>Delete</button>
+      <button className='card_btn_edit' onClick={handleEdit}>Edit</button>
+      </div>
     </article>
+    </div>
   )
 }
 

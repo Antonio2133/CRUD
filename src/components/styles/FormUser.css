@@ -3,15 +3,15 @@
 }
 
 .form_container {
-  position: fixed;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
   top: 0;
   left: 0;
   width: 100%;
   min-height: 100vh;
-  background-color:rgba(220, 230, 226, 0.521);
   backdrop-filter: blur(2px);
-  display: grid;
-  place-content: center;
   transition: transform 150ms ease;
 }
 

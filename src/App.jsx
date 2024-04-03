@@ -8,6 +8,7 @@ import UserCard from './components/UserCard.jsx'
 function App() {
 
   const [userEdit, setUserEdit] = useState()
+  const [formIsClose, setFormIsClose] = useState(true)
   const BASEURL = 'https://users-crud.academlo.tech'
   const [users, getUsers, createUser, deleteUser, updateUser] = useCrud(BASEURL)
 
@@ -15,12 +16,15 @@ function App() {
     getUsers('/users/')
   }, [])
 
-  
+  const handleOpenForm = () => {
+    setFormIsClose(false)
+  }
 
   return (
     <div className='app'>
       <header className='app_header'>
         <h1 className='_title'>User Crud</h1>
+        <button onClick={handleOpenForm} className='form_btn'>Create new user</button>
       </header>
       
       <FormUser
@@ -28,6 +32,8 @@ function App() {
         userEdit={userEdit}
         updateUser={updateUser}
         setUserEdit={setUserEdit}
+        formIsClose={formIsClose}
+        setFormIsClose={setFormIsClose}
       />
       <div className='user_container'>
         {
@@ -37,6 +43,7 @@ function App() {
               user={user}
               deleteUser={deleteUser}
               setUserEdit={setUserEdit}
+              handleOpenForm={handleOpenForm}
             />
           ))
         }

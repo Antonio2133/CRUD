@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import './styles/FormUser.css'
 
-const FormUser = ({createUser, userEdit, updateUser, setUserEdit}) => {
+const FormUser = ({createUser, userEdit, updateUser, setUserEdit, formIsClose, setFormIsClose}) => {
 
   const { handleSubmit, register, reset } = useForm()
 
@@ -17,7 +17,7 @@ const FormUser = ({createUser, userEdit, updateUser, setUserEdit}) => {
     }else{
       createUser('/users/', data)
     }
-    createUser('/users/', data)
+    setFormIsClose(true)
     reset({
       email: '',
       password: '',
@@ -27,12 +27,24 @@ const FormUser = ({createUser, userEdit, updateUser, setUserEdit}) => {
     })
   }
 
+  const handleFormClose = () => {
+    setFormIsClose(true)
+    reset({
+      email: '',
+      password: '',
+      firt_name: '',
+      last_name: '',
+      birthday: ''
+    })
+    setUserEdit()
+  }
+
   return (
-    <div className='form_container'>
+    <div className={`form_container ${formIsClose && 'form_close'}`}>
       <form className='form' onSubmit={handleSubmit(submit)}>
         <header className='form_header'>
           <h2 className='form_title'>User Form: </h2>
-          <div className='form_exit'>X</div>
+          <div onClick={handleFormClose} className='form_exit'>X</div>
         </header>
         <label className='form_label'>
           <span className='form_field'>Email</span>
